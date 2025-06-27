@@ -18,10 +18,13 @@ def create_database():
         
         if connection.is_connected():
             cursor = connection.cursor()
+            
+            # Create database if not exists (without using SHOW or SELECT)
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+            
             print("Database 'alx_book_store' created successfully!")
             
-    except Error as e:
+    except mysql.connector.Error as e:  # التعديل الرئيسي هنا
         print(f"Error while connecting to MySQL: {e}")
     finally:
         if 'connection' in locals() and connection.is_connected():
