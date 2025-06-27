@@ -1,24 +1,24 @@
+#!/usr/bin/python3
+"""
+Python script to create akbookstore database in MySQL
+"""
+
 import mysql.connector
-from mysql.connector import Error
 
 def create_database():
     """Create MySQL database if it doesn't exist"""
     try:
-        # Connect to MySQL server without specifying a database
+        # Connect to MySQL server
         connection = mysql.connector.connect(
             host='localhost',
-            user='root',  # Replace with your MySQL username
-            password=''    # Replace with your MySQL password
+            user='root',
+            password=''
         )
         
-        if connection.is_connected():
-            cursor = connection.cursor()
-            
-            # Create database if not exists (without using SHOW or SELECT)
-            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-            
-            print("Database 'alx_book_store' created successfully!")
-            
+        cursor = connection.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS akbookstore")
+        print("Database 'akbookstore' created successfully!")
+        
     except mysql.connector.Error as e:
         print(f"Error while connecting to MySQL: {e}")
     finally:
